@@ -1,59 +1,75 @@
-# StudentRegistration
+# Student Registration System 📝
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+This is a web-based **Student Registration System** built using **Angular**. It allows users to register for different types of courses, view their registration dashboard, and manage course offerings.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Features
 
-```bash
+- 🧾 Student Registration Form
+- 🗂️ Course Type Management (Individual, Group, Special)
+- 📚 Course & Duration Selection (Java, Python, MERN, MEAN)
+- 📊 Dashboard with Edit/Delete functionality
+- 🏠 Home Page with Navigation
+- 🔒 Logout functionality
+
+---
+
+## 🛠 Tech Stack
+
+- Angular 16+
+- Bootstrap / Angular Material
+- TypeScript
+- HTML5, SCSS
+- RxJS
+- Local Storage (for data persistence)
+
+---
+
+## 📸 Screenshots
+
+> Add screenshots here after deploying or capturing UI pages.
+
+---
+
+## 📦 Setup Instructions
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/murariram2905/student-registration.git
+   cd student-registration
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Run the Angular app:
+
+bash
+Copy
+Edit
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+📁 Folder Structure (Important Files)
+css
+Copy
+Edit
+src/
+ ┣ app/
+ ┃ ┣ home/
+ ┃ ┣ header/
+ ┃ ┣ footer/
+ ┃ ┣ dashboard/
+ ┃ ┣ student-registrations/
+ ┃ ┣ data.service.ts
+ ┃ ┣ app.module.ts
+ ┃ ┣ app.component.*
+ 
+## 🙋‍♂️ Author
+# Ramakrishna Murari
+📧 murariram2905@gmail.com
+# 🌐 Portfolio Website : https://murari-student-registration.netlify.app/
+# 🔗 LinkedIn : https://www.linkedin.com/in/murariram2905/
