@@ -1,0 +1,48 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  padding-bottom: 60px; // Ensure content doesn’t overlap with sticky footer
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 800px; // Optional: limit content width for better centering
+  padding: 20px;
+}
+
+nav {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ffffff; // White text for contrast on #052342 background
+}
+
+nav a:hover {
+  color: #d3d3d3; // Light gray hover for subtle effect
+}
+
+app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #052342; // Theme color
+}
+
+app-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  background-color: #052342; // Theme color
+}
