@@ -6,7 +6,7 @@
 
 main {
   flex-grow: 1;
-  padding-bottom: 60px; // Ensure content doesn’t overlap with sticky footer
+  padding-bottom: 60px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ main {
 
 .content-wrapper {
   width: 100%;
-  max-width: 800px; // Optional: limit content width for better centering
+  max-width: 800px; 
   padding: 20px;
 }
 
@@ -26,23 +26,23 @@ nav {
 nav a {
   margin: 0 10px;
   text-decoration: none;
-  color: #ffffff; // White text for contrast on #052342 background
+  color: #ffffff; 
 }
 
 nav a:hover {
-  color: #d3d3d3; // Light gray hover for subtle effect
+  color: #d3d3d3; 
 }
 
 app-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #052342; // Theme color
+  background-color: #052342; 
 }
 
 app-footer {
   position: sticky;
   bottom: 0;
   z-index: 1000;
-  background-color: #052342; // Theme color
+  background-color: #052342; 
 }

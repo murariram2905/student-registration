@@ -1,71 +1,24 @@
-<div class="dashboard-container">
-  <h2>Student Dashboard</h2>
+<div class="dashboard-container" *ngIf="registration">
+  <h2>Dashboard</h2>
+
   <div class="dashboard-header">
-  <h4 class="welcome-message">Welcome, {{ registration.studentName }}</h4>
-  <button class="logout-btn" (click)="logout()">Logout</button>
-</div>
-
-
-  <div *ngIf="isDataLoaded && registration" class="details">
-    <h3>Your Registration Details</h3>
-
-    <div class="field">
-      <label>Student Name:</label>
-      <span *ngIf="!editing['studentName']">{{ registration.studentName }}</span>
-      <input *ngIf="editing['studentName']" [(ngModel)]="registration.studentName" (blur)="updateRegistration()">
-      <button (click)="editField('studentName')">Edit</button>
-      <button (click)="deleteField('studentName')">Delete</button>
-    </div>
-
-    <div class="field">
-      <label>Email:</label>
-      <span *ngIf="!editing['email']">{{ registration.email }}</span>
-      <input *ngIf="editing['email']" [(ngModel)]="registration.email" type="email" (blur)="updateRegistration()">
-      <button (click)="editField('email')">Edit</button>
-      <button (click)="deleteField('email')">Delete</button>
-    </div>
-
-    <div class="field">
-      <label>Course Type:</label>
-      <span *ngIf="!editing['courseTypeId']">{{registration.courseTypeId}}</span>
-      <select *ngIf="editing['courseTypeId']" [(ngModel)]="registration.courseTypeId" (change)="updateRegistration()">
-         <option value="0" disabled>Select Course</option>
-        <option value="Individual">Individual</option>
-        <option value="Group">Group</option>
-        <option value="Special">Special</option>
-      </select>
-      <button (click)="editField('courseTypeId')">Edit</button>
-      <button (click)="deleteField('courseTypeId')">Delete</button>
-    </div>
-
-    <div class="field">
-      <label>Course:</label>
-      <span *ngIf="!editing['courseId']">{{ registration.courseId}}</span>
-      <select *ngIf="editing['courseId']" [(ngModel)]="registration.courseId" (change)="updateRegistration()">
-        <option value="0" disabled>Select Course</option>
-         <option value="Python FullStack">Python  fullstack</option>
-        <option value="Java FullStack">Java  fullstack</option>
-        <option value="MERN Fullstack">MERN  fullstack</option>
-        <option value="MEAN Fullstack">MEAN  fullstack</option>
-      </select>
-      <button (click)="editField('courseId')">Edit</button>
-      <button (click)="deleteField('courseId')">Delete</button>
-    </div>
-
-    <div class="field">
-      <label>Course Duration:</label>
-      <span *ngIf="!editing['offeringDays']">{{ registration.offeringDays }} Days</span>
-      <select *ngIf="editing['offeringDays']" [(ngModel)]="registration.offeringDays" (change)="updateRegistration()">
-        <option value="0" disabled>Select Duration</option>
-        <option value="30">30 Days</option>
-        <option value="45">45 Days</option>
-        <option value="60">60 Days</option>
-      </select>
-      <button (click)="editField('offeringDays')">Edit</button>
-      <button (click)="deleteField('offeringDays')">Delete</button>
-    </div>
-
-    <p *ngIf="updateMessage" class="update-message">{{ updateMessage }}</p>
+    <p class="welcome-message">Welcome, {{ registration.studentName }}</p>
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 
+  <div class="details">
+    <h3>Student Registration Details</h3>
+
+    <div class="field" *ngFor="let field of ['studentName', 'email', 'courseType', 'course', 'durationDays']">
+      <label>{{ field | titlecase }}:</label>
+
+      <span *ngIf="editingField !== field">{{ registration[field] }}</span>
+      <input *ngIf="editingField === field" [(ngModel)]="registration[field]" (blur)="save()" />
+
+      <button (click)="edit(field)">Edit</button>
+      <button (click)="deleteField(field)">Delete</button>
+    </div>
+
+    <div *ngIf="message" class="update-message">{{ message }}</div>
+  </div>
 </div>

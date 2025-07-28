@@ -11,104 +11,35 @@ import { combineLatest } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
   registration: any = null;
-  courseTypes: any[] = [];
-  courses: any[] = [];
-  filteredRegistrations: any[] = [];
-  editing: { [key: string]: boolean } = {
-    studentName: false,
-    email: false,
-    courseTypeId: false,
-    courseId: false,
-    offeringDays: false
-  };
-  updateMessage: string = '';
-  isDataLoaded: boolean = false;
+  editingField: string | null = null;
+  message = '';
 
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
-    this.refreshData();
-  }
-
-  refreshData() {
-    combineLatest([
-      this.dataService.getRegistrations(),
-    ]).subscribe({
-      next: ([registrations]) => {
-        console.log('Registrations received:', registrations);
-        this.registration = registrations.length > 0 ? registrations[registrations.length - 1] : null;
-        if (this.registration) {
-          this.filteredRegistrations = registrations.filter(
-            (reg: any) => reg.courseTypeId === this.registration.courseTypeId &&
-                          reg.courseId === this.registration.courseId &&
-                          reg.courseOfferingId === this.registration.courseOfferingId
-          );
-        }
-        if (!this.registration && registrations.length > 0) {
-          setTimeout(() => this.refreshData(), 500);
-        } else {
-          this.isDataLoaded = true;
-        }
-      },
-      error: (error) => console.error('Error loading data:', error)
+    this.dataService.getRegistrations().subscribe(data => {
+      this.registration = data[data.length - 1] || null;
     });
   }
 
-  editField(field: string) {
-    this.editing[field] = !this.editing[field];
+  edit(field: string) {
+    this.editingField = field;
   }
 
-  updateRegistration() {
-    if (this.registration) {
-      if (!this.registration.studentName && this.editing['studentName']) {
-        this.updateMessage = 'Name cannot be empty.';
-        return;
-      }
-      if (!this.registration.email && this.editing['email']) {
-        this.updateMessage = 'Email cannot be empty.';
-        return;
-      }
-      if (this.editing['courseTypeId'] && this.registration.courseTypeId === 0) {
-        this.updateMessage = 'Please select a course type.';
-        return;
-      }
-      if (this.editing['courseId'] && this.registration.courseId === 0) {
-        this.updateMessage = 'Please select a course.';
-        return;
-      }
-      if (this.editing['offeringDays'] && this.registration.offeringDays === 0) {
-        this.updateMessage = 'Please select a duration.';
-        return;
-      }
-
-      this.dataService.updateRegistration(this.registration).subscribe(() => {
-        this.updateMessage = 'Registration updated successfully!';
-        setTimeout(() => this.updateMessage = '', 2000);
-        Object.keys(this.editing).forEach(key => this.editing[key] = false);
-        this.dataService.getRegistrations().subscribe(registrations => {
-          this.filteredRegistrations = registrations.filter(
-            (reg: any) => reg.courseOfferingId === this.registration.courseOfferingId
-          );
-        });
-      });
-    }
+  save() {
+    this.dataService.updateRegistration(this.registration).subscribe(() => {
+      this.message = "Updated successfully!";
+      this.editingField = null;
+      setTimeout(() => this.message = '', 2000);
+    });
   }
 
   deleteField(field: string) {
-    if (this.registration && confirm('Are you sure you want to clear this field?')) {
-      if (field === 'studentName') this.registration.studentName = '';
-      if (field === 'email') this.registration.email = '';
-      if (field === 'courseTypeId') this.registration.courseTypeId = 0;
-      if (field === 'courseId') this.registration.courseId = 0;
-      if (field === 'offeringDays') this.registration.offeringDays = 0;
-      this.dataService.updateRegistration(this.registration).subscribe(() => {
-        this.updateMessage = 'Field cleared successfully!';
-        setTimeout(() => this.updateMessage = '', 2000);
-      });
-    }
+    this.dataService.deleteField(this.registration, field).subscribe(() => {
+      this.message = "Field cleared!";
+      setTimeout(() => this.message = '', 2000);
+    });
   }
-
- 
 
   logout() {
     this.router.navigate(['/']);
